@@ -1,0 +1,14 @@
+{
+  "/api/hello": "pages/api/hello.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/_app": "pages/_app.js",
+  "/blog/[id]/edit": "pages/blog/[id]/edit.html",
+  "/blog": "pages/blog.html",
+  "/blog/new-blog": "pages/blog/new-blog.html",
+  "/category/main-category": "pages/category/main-category.html",
+  "/": "pages/index.html",
+  "/category/new-main-category": "pages/category/new-main-category.html",
+  "/main": "pages/main.html",
+  "/404": "pages/404.html"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "next lint",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "axios": "^1.5.1",
+    "jodit-react": "^1.3.39",
+    "mui-datatables": "^4.3.0",
+    "next": "13.5.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-pro-sidebar": "^1.1.0-alpha.1",
+    "sharp": "^0.32.6"
+  }
+}
