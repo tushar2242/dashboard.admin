@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Siderbar from '../../helpers/siderbar';
 import withAuth from '@/customHook/withAuth';
 import axios from 'axios';
@@ -13,9 +13,64 @@ const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
 const url = 'https://api.newworldtrending.com/blog';
 
+
+const config = {
+    readonly: false,
+    enableDragAndDropFileToEditor: true,
+    uploader: {
+        insertImageAsBase64URI: false,
+        imagesExtensions: ['jpg', 'png', 'jpeg', 'gif'],
+        withCredentials: false,
+        format: 'json',
+        method: 'POST',
+        url: `https://api.newworldtrending.com/blog/file/upload`,
+        prepareData: function (data) {
+            //@ts-ignore
+            // console.info("predata", data.getAll('files[0]'))
+            data.append('file', data.get('files[0]'));
+            return data;
+        },
+        isSuccess: function (resp) {
+            // console.log("resp", resp)
+            return !resp.error;
+        },
+        process: function (resp) {
+            // console.log(resp)
+            return {
+                files: [resp.data],
+                path: resp.path,
+                baseurl: resp.baseurl,
+                error: resp.error ? 1 : 0,
+                msg: resp.msg
+            };
+        },
+        defaultHandlerSuccess: function (data, resp) {
+            const files = data.files || [];
+            console.log("default data", data)
+            console.log("resp", resp)
+            if (files.length) {
+                //@ts-ignore
+                this.selection.insertImage(data.baseurl, null, 250);
+            }
+        },
+        defaultHandlerError: function (resp) {
+            console.log("error occure", resp)
+            //@ts-ignore
+            this.events.fire('errorPopap', this.i18n(resp?.msg));
+        }
+    },
+
+
+
+}
+
+
 const BlogPage = () => {
     const route = useRouter();
     const editor = useRef(null);
+
+
+
 
     const initialData = {
         title: "",
@@ -104,7 +159,7 @@ const BlogPage = () => {
 
             // console.log(res)
             alert(res.data.message)
-            if(res.data?.message?.length>0){
+            if (res.data?.message?.length > 0) {
                 setBlogData(initialData)
             }
         }
@@ -150,7 +205,6 @@ const BlogPage = () => {
                 loading ?
                     <Loader1 />
                     :
-
                     <>
 
                         <Siderbar />
@@ -192,9 +246,11 @@ const BlogPage = () => {
 
                                                 <JoditEditor
                                                     ref={editor}
+
+                                                    config={config}
+                                                    autofoucus={true}
                                                     value={blogData.content}
-                                                    // config={config}
-                                                    tabIndex={1} // tabIndex of textarea
+                                                    tabIndex={-1} // tabIndex of textarea
 
                                                     required
                                                     onChange={newContent => { handleInputChange('content', newContent); }}
@@ -367,3 +423,10 @@ const BlogPage = () => {
 };
 
 export default withAuth(BlogPage);
+
+
+
+
+
+
+

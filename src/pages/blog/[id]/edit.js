@@ -13,6 +13,57 @@ const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
 const url = 'https://api.newworldtrending.com/blog';
 
+const config = {
+    readonly: false,
+    enableDragAndDropFileToEditor: true,
+    uploader: {
+        insertImageAsBase64URI: false,
+        imagesExtensions: ['jpg', 'png', 'jpeg', 'gif'],
+        withCredentials: false,
+        format: 'json',
+        method: 'POST',
+        url: `https://api.newworldtrending.com/blog/file/upload`,
+        prepareData: function (data) {
+            //@ts-ignore
+            // console.info("predata", data.getAll('files[0]'))
+            data.append('file', data.get('files[0]'));
+            return data;
+        },
+        isSuccess: function (resp) {
+            // console.log("resp", resp)
+            return !resp.error;
+        },
+        process: function (resp) {
+            // console.log(resp)
+            return {
+                files: [resp.data],
+                path: resp.path,
+                baseurl: resp.baseurl,
+                error: resp.error ? 1 : 0,
+                msg: resp.msg
+            };
+        },
+        defaultHandlerSuccess: function (data, resp) {
+            const files = data.files || [];
+            console.log("default data", data)
+            console.log("resp", resp)
+            if (files.length) {
+                //@ts-ignore
+                this.selection.insertImage(data.baseurl, null, 250);
+            }
+        },
+        defaultHandlerError: function (resp) {
+            console.log("error occure", resp)
+            //@ts-ignore
+            this.events.fire('errorPopap', this.i18n(resp?.msg));
+        }
+    },
+
+
+
+}
+
+
 const EditBlog = () => {
 
     const editor = useRef(null);
@@ -194,7 +245,7 @@ const EditBlog = () => {
                                     <div className="card-body row container gx-4 gy-4">
 
                                         <div className="pt pb-2">
-                                            <h5 className="card-title text-center pb-0 fs-4">Edit Blog Here</h5>
+                                            <h5 className="card-title text-center pb-0 fs-4">Update Blog Here</h5>
                                         </div>
 
                                         <div className="md-12">
@@ -225,7 +276,7 @@ const EditBlog = () => {
                                             <JoditEditor
                                                 ref={editor}
                                                 value={blogData.content}
-                                                // config={config}
+                                                config={config}
                                                 tabIndex={1} // tabIndex of textarea
 
                                                 required
@@ -385,7 +436,7 @@ const EditBlog = () => {
                                                 className="btn btn-primary"
                                                 type='submit'
                                             >
-                                                Add Blog
+                                                Update Blog
                                             </button>
                                         </div>
 
