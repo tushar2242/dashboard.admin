@@ -25,8 +25,7 @@ const config = {
         method: 'POST',
         url: `https://api.newworldtrending.com/blog/file/upload`,
         prepareData: function (data) {
-            //@ts-ignore
-            // console.info("predata", data.getAll('files[0]'))
+
             data.append('file', data.get('files[0]'));
             return data;
         },
@@ -46,8 +45,7 @@ const config = {
         },
         defaultHandlerSuccess: function (data, resp) {
             const files = data.files || [];
-            console.log("default data", data)
-            console.log("resp", resp)
+
             if (files.length) {
                 //@ts-ignore
                 this.selection.insertImage(data.baseurl, null, 250);

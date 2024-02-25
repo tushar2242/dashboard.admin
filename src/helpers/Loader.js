@@ -21,21 +21,21 @@ export default Loader;
 export const Loader1 = () => {
     return (
         <>
-        <div className='loader-outer'>
+            <div className='loader-outer'>
 
 
-            <div class="loading-container">
-                <div class="loading-text">
-                    <span>L</span>
-                    <span>O</span>
-                    <span>A</span>
-                    <span>D</span>
-                    <span>I</span>
-                    <span>N</span>
-                    <span>G</span>
+                <div className="loading-container">
+                    <div className="loading-text">
+                        <span>L</span>
+                        <span>O</span>
+                        <span>A</span>
+                        <span>D</span>
+                        <span>I</span>
+                        <span>N</span>
+                        <span>G</span>
+                    </div>
                 </div>
             </div>
-            </div> 
         </>
     )
 }

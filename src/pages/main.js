@@ -5,10 +5,18 @@ import { getImage } from '@/customHook/getImage';
 import Siderbar from '@/helpers/siderbar';
 import withAuth from '@/customHook/withAuth';
 import { useRouter } from 'next/router';
+import { CSVLink } from 'react-csv';
+
+import moment from 'moment';
 
 const url = 'https://api.newworldtrending.com/blog';
 
-const redirect_url = 'https://world.blog.newworldtrending.com/blog/'
+const redirect_url = 'https://world.blog.newworldtrending.com/blog/';
+
+
+
+
+
 
 const MUITable = () => {
 
@@ -19,23 +27,24 @@ const MUITable = () => {
 
 
   function titleToSlug(title) {
-    // Convert to lowercase and replace spaces with dashes
     const slug = title.toLowerCase().replace(/\s+/g, '-');
 
-    // Remove special characters and non-alphanumeric characters
     const cleanSlug = slug.replace(/[^\w-]/g, '');
 
     return cleanSlug;
   }
 
-  // Example usage:
-  const title = "Create a Function to Replace Title into Slug in JS";
-  const slug = titleToSlug(title);
-  console.log(slug);
+
+  const generateCSVData = (data) => {
+    return data.map(blog => [
+      `https://newworldtrending.com/blog/${blog.id}/${titleToSlug(blog.title)}`,
+    ]);
+  };
 
 
   const columns = [
     { label: 'ID', name: 'id' },
+
     {
       label: 'Edit Blog',
       name: 'title',
@@ -43,11 +52,11 @@ const MUITable = () => {
         customBodyRender: (value, tableMeta) => (
           <div title={value} className='btn btn-primary' onClick={() => {
             const blogId = tableMeta.rowData[0];
-            router.replace('/blog/'+blogId+'/edit');
+            router.replace('/blog/' + blogId + '/edit');
           }}>
             <i
               className="fa fa-edit"
-              style={{cursor:'pointer'}}
+              style={{ cursor: 'pointer' }}
             ></i>
           </div>
         ),
@@ -71,7 +80,7 @@ const MUITable = () => {
         ),
       },
     },
-    
+
     {
       label: 'NWLink',
       name: 'title',
@@ -83,121 +92,50 @@ const MUITable = () => {
           }}>
             <i
               className="fa fa-desktop "
-              
+
               style={{ cursor: 'pointer' }}
             ></i>
           </div>
         ),
       },
     },
+
     {
       label: 'Author',
-      name: 'author', 
+      name: 'author',
       options: {
         customBodyRender: (value) => (
           <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
         ),
       },
     },
-    {
-      label: 'Content',
-      name: 'content',
-      options: {
-        customBodyRender: (value) => (
-          <div title={value} dangerouslySetInnerHTML={{ __html:  value.length > 30 ? `${value.slice(0, 30)}...` : value  }}></div>
-        ),
-      },
-    },
-    {
-      label: 'Meta Title',
-      name: 'metaTitle',
-      options: {
-        customBodyRender: (value) => (
-          <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-        ),
-      },
-    },
-    {
-      label: 'Meta Description',
-      name: 'metaDescription',
-      options: {
-        customBodyRender: (value) => (
-          <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-        ),
-      },
-    },
-    // {
-    //   label: 'Categories',
-    //   name: 'categories',
-    //   options: {
-    //     customBodyRender: (value) => (
-    //       <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-    //     ),
-    //   },
-    // },
-    // {
-    //   label: 'Tags',
-    //   name: 'tags',
-    //   options: {
-    //     customBodyRender: (value) => (
-    //       <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-    //     ),
-    //   },
-    // },
     {
       label: 'Published Date',
       name: 'publishedDate',
       options: {
         customBodyRender: (value) => (
-          <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+          <div title={value}>{moment(value).format("Do MMM YY")}</div>
         ),
       },
     },
-    {
-      label: 'Status',
-      name: 'status',
-      options: {
-        customBodyRender: (value) => (
-          <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-        ),
-      },
-    },
-    {
-      label: 'Instagram Link',
-      name: 'instagramLink',
-      options: {
-        customBodyRender: (value) => (
-          <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-        ),
-      },
-    },
-    {
-      label: 'Youtube Link',
-      name: 'youtubeLink',
-      options: {
-        customBodyRender: (value) => (
-          <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-        ),
-      },
-    },
-    {
-      label: 'Facebook Link',
-      name: 'facebookLink',
-      options: {
-        customBodyRender: (value) => (
-          <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
-        ),
-      },
-    },
+
   ];
 
 
   const options = {
-    filterType: typeof window !== 'undefined' && window.innerWidth > 200 ? 'none' : 'none',
+    filterType: 'dropdown',
     responsive: 'standard',
-    // setRowId: (rowData) => `custom-id-${rowData[0]}`, // Assuming the first column is the unique identifier (title in this case)
-  };
+    textLabels: {
+      body: {
+        noMatch: 'No Records Found',
+      },
+    },
+    print: false,
+    download: false,
+    pagination: false,
+    rowsPerPageOptions: [100, 150, 200],
 
+  };
   async function updateBannerUrls(blogArray) {
     const updatedBlogArray = [];
 
@@ -222,7 +160,7 @@ const MUITable = () => {
 
       // Call the updateBannerUrls function to update the banner field
       const updatedBlogRes = await updateBannerUrls(res.data.data);
-      setBlogData(updatedBlogRes);
+      setBlogData(updatedBlogRes.reverse());
     } catch (err) {
       console.log(err);
       setBlogData(null);
@@ -239,23 +177,143 @@ const MUITable = () => {
   return (
     <>
       <Siderbar />
-      <div className="container"> </div>
-      <div style={{ width: 'auto', padding: '10px' }}>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          blogData && (
-            <MUIDataTable
-              columns={columns}
-              data={blogData}
-              title='Your Written Blog Data'
-              options={options}
-            />
-          )
-        )}
+      {/* <div className="container"> </div> */}
+      <div className='table-vw-size mbvw-tbl-scrl'>
+        <div style={{ width: 'auto', padding: '10px' }}>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            blogData && (
+              <MUIDataTable
+                columns={columns}
+                data={blogData}
+                title={<div className="container row p-3">
+                  <h6 className='row__title p-3 d-flex align-items-center'>
+                    <div className='btn btn-outline-warning'>
+                      <CSVLink
+                        data={generateCSVData(blogData)}
+                        filename={"website_url.csv"}
+                      >
+                        Download CSV
+                      </CSVLink>
+                    </div>
+                    {/* <div className='btn btn-outline-warning'>
+                      <CSVLink
+                        data={generateCSVData(blogData)}
+                        filename={"website_url.csv"}
+                      >
+                        Don't Download
+                      </CSVLink>
+                    </div> */}
+                  </h6>
+                </div>}
+                options={options}
+              />
+            )
+          )}
+        </div>
       </div>
     </>
   );
 };
 
-export default withAuth(MUITable) ;
+export default withAuth(MUITable);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// {
+//   label: 'Content',
+//   name: 'content',
+//   options: {
+//     customBodyRender: (value) => (
+//       <div title={value} dangerouslySetInnerHTML={{ __html:  value.length > 30 ? `${value.slice(0, 30)}...` : value  }}></div>
+//     ),
+//   },
+// },
+// {
+//   label: 'Meta Title',
+//   name: 'metaTitle',
+//   options: {
+//     customBodyRender: (value) => (
+//       <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//     ),
+//   },
+// },
+// {
+//   label: 'Meta Description',
+//   name: 'metaDescription',
+//   options: {
+//     customBodyRender: (value) => (
+//       <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//     ),
+//   },
+// },
+// {
+//   label: 'Categories',
+//   name: 'categories',
+//   options: {
+//     customBodyRender: (value) => (
+//       <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//     ),
+//   },
+// },
+// {
+//   label: 'Tags',
+//   name: 'tags',
+//   options: {
+//     customBodyRender: (value) => (
+//       <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//     ),
+//   },
+// },
+
+//   {
+//     label: 'Status',
+//     name: 'status',
+//     options: {
+//       customBodyRender: (value) => (
+//         <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//       ),
+//     },
+//   },
+//   {
+//     label: 'Instagram Link',
+//     name: 'instagramLink',
+//     options: {
+//       customBodyRender: (value) => (
+//         <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//       ),
+//     },
+//   },
+//   {
+//     label: 'Youtube Link',
+//     name: 'youtubeLink',
+//     options: {
+//       customBodyRender: (value) => (
+//         <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//       ),
+//     },
+//   },
+//   {
+//     label: 'Facebook Link',
+//     name: 'facebookLink',
+//     options: {
+//       customBodyRender: (value) => (
+//         <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
+//       ),
+//     },
+//   },
