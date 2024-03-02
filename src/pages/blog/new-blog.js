@@ -186,6 +186,27 @@ const BlogPage = () => {
     }
 
 
+    async function handleUpdateBlog() {
+        setIsLoading(true)
+        try {
+            const res = await axios.post('https://ai.keyword.extractor.newworldtrending.com/get-key', {
+                "text": blogData.title + ' ' + blogData.metaDescription
+            })
+            console.log(res.data.keyword_data)
+            setBlogData({
+                ...blogData,
+                categories: res?.data?.keyword_data[0],
+                tags: res?.data?.keyword_data[1],
+
+            })
+        }
+        catch (err) {
+            console.log(err)
+        }
+
+        setIsLoading(false)
+    }
+
 
 
     useEffect(() => {
@@ -294,8 +315,15 @@ const BlogPage = () => {
                                                         ))}
                                                 </select>
                                             </div>
+                                            <div className="md-4">
+                                                {(blogData.title && blogData.metaDescription) && <button
+                                                    className="btn btn-primary"
 
-
+                                                    onClick={() => handleUpdateBlog()}
+                                                >
+                                                    Generate
+                                                </button>}
+                                            </div>
                                             <div className="md-12">
                                                 <label htmlFor="categories" className="form-label">Keywords</label>
                                                 <input
