@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"blog\\\\new-blog.js -> jodit-react\":{\"id\":\"blog\\\\new-blog.js -> jodit-react\",\"files\":[\"static/chunks/node_modules_jodit-react_build_jodit-react_js.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST='{"blog\\\\[id]\\\\edit.js -> jodit-react":{"id":72911,"files":["static/chunks/f70991a6.25ca9f9609d72731.js","static/chunks/640.f619b825be33e004.js"]},"blog\\\\new-blog.js -> jodit-react":{"id":72911,"files":["static/chunks/f70991a6.25ca9f9609d72731.js","static/chunks/640.f619b825be33e004.js"]}}';

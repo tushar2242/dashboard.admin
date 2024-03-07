@@ -222,7 +222,9 @@ const BlogPage = () => {
         <>
             {
                 loading ?
-                    <Loader1 />
+                    <Loader1
+
+                    />
                     :
                     <>
 
