@@ -1,0 +1,88 @@
+upstream image response failed for /_next/static/media/logo.b057fcb6.jpg TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11457:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async invokeRequest (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/lib/server-ipc/invoke-request.js:16:12)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:362:35
+    at async imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:537:13)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1102:18)
+      at afterConnectMultiple (node:net:1615:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+ImageError: "url" parameter is valid but upstream response is invalid
+    at imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:549:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  statusCode: 500
+}
+upstream image response failed for /_next/static/media/logo.b057fcb6.jpg TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11457:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async invokeRequest (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/lib/server-ipc/invoke-request.js:16:12)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:362:35
+    at async imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:537:13)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1102:18)
+      at afterConnectMultiple (node:net:1615:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+ImageError: "url" parameter is valid but upstream response is invalid
+    at imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:549:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  statusCode: 500
+}
+upstream image response failed for /_next/static/media/logo.b057fcb6.jpg TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11457:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async invokeRequest (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/lib/server-ipc/invoke-request.js:16:12)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:362:35
+    at async imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:537:13)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1102:18)
+      at afterConnectMultiple (node:net:1615:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+ImageError: "url" parameter is valid but upstream response is invalid
+    at imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:549:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  statusCode: 500
+}
+upstream image response failed for /_next/static/media/logo.b057fcb6.jpg TypeError: fetch failed
+    at Object.fetch (node:internal/deps/undici/undici:11457:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async invokeRequest (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/lib/server-ipc/invoke-request.js:16:12)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:362:35
+    at async imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:537:13)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  cause: AggregateError
+      at internalConnectMultiple (node:net:1102:18)
+      at afterConnectMultiple (node:net:1615:5) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+ImageError: "url" parameter is valid but upstream response is invalid
+    at imageOptimizer (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/image-optimizer.js:549:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async cacheEntry.imageResponseCache.get.incrementalCache (/home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/next-server.js:517:61)
+    at async /home/newworl3/nodevenv/dashboard.admin/20/lib/node_modules/next/dist/server/response-cache/index.js:102:36 {
+  statusCode: 500
+}
