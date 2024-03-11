@@ -31,28 +31,28 @@ const MUITable = () => {
   // Example usage:
   const title = "Create a Function to Replace Title into Slug in JS";
   const slug = titleToSlug(title);
-  
+
 
 
   const columns = [
     { label: 'ID', name: 'id' },
     {
-        label: 'Edit Blog',
-        name: 'title',
-        options: {
-          customBodyRender: (value, tableMeta) => (
-            <div title={value} className='btn btn-primary' onClick={() => {
-              const blogId = tableMeta.rowData[0];
-              router.replace('/blog/'+blogId+'/edit');
-            }}>
-              <i
-                className="fa fa-edit"
-                style={{cursor:'pointer'}}
-              ></i>
-            </div>
-          ),
-        },
+      label: 'Edit Blog',
+      name: 'title',
+      options: {
+        customBodyRender: (value, tableMeta) => (
+          <div title={value} className='btn btn-primary' onClick={() => {
+            const blogId = tableMeta.rowData[0];
+            router.replace('/blog/' + blogId + '/edit');
+          }}>
+            <i
+              className="fa fa-edit"
+              style={{ cursor: 'pointer' }}
+            ></i>
+          </div>
+        ),
       },
+    },
     {
       label: 'Banner',
       name: 'banner',
@@ -71,7 +71,7 @@ const MUITable = () => {
         ),
       },
     },
-   
+
     {
       label: 'NWLink',
       name: 'title',
@@ -83,7 +83,25 @@ const MUITable = () => {
           }}>
             <i
               className="fa fa-desktop "
-              
+
+              style={{ cursor: 'pointer' }}
+            ></i>
+          </div>
+        ),
+      },
+    },
+    {
+      label: 'WLink',
+      name: 'title',
+      options: {
+        customBodyRender: (value, tableMeta) => (
+          <div title={value} className='btn btn-primary' onClick={() => {
+            const blogId = tableMeta.rowData[0]; // Assuming ID is in the first column
+            router.push(redirect_url + blogId + '/' + titleToSlug(value));
+          }}>
+            <i
+              className="fa fa-desktop "
+
               style={{ cursor: 'pointer' }}
             ></i>
           </div>
@@ -92,7 +110,7 @@ const MUITable = () => {
     },
     {
       label: 'Author',
-      name: 'author', 
+      name: 'author',
       options: {
         customBodyRender: (value) => (
           <div title={value}>{value.length > 30 ? `${value.slice(0, 30)}...` : value}</div>
@@ -104,7 +122,7 @@ const MUITable = () => {
       name: 'content',
       options: {
         customBodyRender: (value) => (
-          <div title={value} dangerouslySetInnerHTML={{ __html:  value.length > 30 ? `${value.slice(0, 30)}...` : value  }}></div>
+          <div title={value} dangerouslySetInnerHTML={{ __html: value.length > 30 ? `${value.slice(0, 30)}...` : value }}></div>
         ),
       },
     },
@@ -258,4 +276,4 @@ const MUITable = () => {
   );
 };
 
-export default withAuth(MUITable) ;
+export default withAuth(MUITable);

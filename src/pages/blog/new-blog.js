@@ -92,7 +92,7 @@ const BlogPage = () => {
     };
 
 
-    const [blogData, setBlogData] = useState(initialData);
+    const [blogData, setBlogData] = useState({});
 
 
     const [loading, setIsLoading] = useState(false)
@@ -108,6 +108,8 @@ const BlogPage = () => {
             ...blogData,
             featuredImages: newImages,
         });
+        localStorage.setItem('blogData', JSON.stringify(blogData));
+
     }
 
     function handleBannerImg(e) {
@@ -117,6 +119,8 @@ const BlogPage = () => {
             ...blogData,
             bannerImg: fileList
         })
+        localStorage.setItem('blogData', JSON.stringify(blogData));
+
     }
 
     const handleInputChange = (field, value) => {
@@ -124,6 +128,8 @@ const BlogPage = () => {
             ...blogData,
             [field]: value,
         });
+        localStorage.setItem('blogData', JSON.stringify(blogData));
+
     };
 
     const handleTitleChange = (e) => {
@@ -132,6 +138,8 @@ const BlogPage = () => {
             title: e.target.value,
             metaTitle: e.target.value,
         })
+        localStorage.setItem('blogData', JSON.stringify(blogData));
+
     }
 
 
@@ -141,6 +149,8 @@ const BlogPage = () => {
             ...blogData,
             trending: e.target.checked ? 1 : 0
         })
+        localStorage.setItem('blogData', JSON.stringify(blogData));
+
     };
 
 
@@ -192,13 +202,14 @@ const BlogPage = () => {
             const res = await axios.post('https://ai.keyword.extractor.newworldtrending.com/get-key', {
                 "text": blogData.title + ' ' + blogData.metaDescription
             })
-            console.log(res.data.keyword_data)
+            // console.log(res.data.keyword_data)
             setBlogData({
                 ...blogData,
                 categories: res?.data?.keyword_data[0],
                 tags: res?.data?.keyword_data[1],
 
             })
+            localStorage.removeItem('blogData')
         }
         catch (err) {
             console.log(err)
@@ -210,13 +221,29 @@ const BlogPage = () => {
 
 
     useEffect(() => {
-
         fetchCategories()
         setBlogData({
             ...blogData,
             adminId: sessionStorage.getItem('userId')
         })
+        const savedBlogData = JSON.parse(localStorage.getItem('blogData'));
+        // console.log(typeof savedBlogData)
+        if (Object.keys(savedBlogData).length != 0) {
+            console.log(savedBlogData)
+            setBlogData(savedBlogData);
+
+        } else {
+            // If no data in localStorage, set initial data
+            console.log('nodata')
+            setBlogData(initialData);
+        }
+
+
+        // console.log(blogData)
+
     }, [])
+
+
 
     return (
         <>
@@ -332,7 +359,7 @@ const BlogPage = () => {
                                                     type="text"
                                                     className="form-control"
                                                     id="categories"
-                                                    value={blogData.categories.join(', ')}
+                                                    value={blogData.categories?.join(', ')}
                                                     required
                                                     onChange={(e) => handleInputChange('categories', e.target.value.split(', '))}
                                                 />
@@ -343,7 +370,7 @@ const BlogPage = () => {
                                                     type="text"
                                                     className="form-control"
                                                     id="tags"
-                                                    value={blogData.tags.join(', ')}
+                                                    value={blogData.tags?.join(', ')}
                                                     required
                                                     onChange={(e) => handleInputChange('tags', e.target.value.split(', '))}
                                                 />

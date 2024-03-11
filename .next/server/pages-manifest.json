@@ -1,9 +1,9 @@
 {
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
   "/api/hello": "pages/api/hello.js",
-  "/blog/[id]/edit": "pages/blog/[id]/edit.html",
+  "/_document": "pages/_document.js",
   "/blog": "pages/blog.html",
+  "/blog/[id]/edit": "pages/blog/[id]/edit.html",
   "/blog/new-blog": "pages/blog/new-blog.html",
   "/category/main-category": "pages/category/main-category.html",
   "/category/new-main-category": "pages/category/new-main-category.html",
