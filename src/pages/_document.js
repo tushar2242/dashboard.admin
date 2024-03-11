@@ -11,6 +11,7 @@ export default function Document() {
         <script src="https://kit.fontawesome.com/d90ef4704f.js" crossOrigin="anonymous"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossOrigin="anonymous"></script>
+<meta name="robots" content="noindex">
 
 
       </Head>
